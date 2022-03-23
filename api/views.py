@@ -5,6 +5,7 @@ from .serializers import EmployeeSerializer
 from employee.models import EmployeeMPTT
 from rest_framework import generics
 from rest_framework import permissions
+from .permissions import IsStaff
 
 
 class EmployeeListView(generics.ListAPIView):
@@ -13,18 +14,18 @@ class EmployeeListView(generics.ListAPIView):
     """
     queryset = EmployeeMPTT.objects.all()
     serializer_class = EmployeeSerializer
-    permission_classes = [permissions.IsAdminUser]
+    permission_classes = [permissions.IsAdminUser, IsStaff]
 
 
 class EmployeeDetailView(generics.RetrieveAPIView):
     queryset = EmployeeMPTT.objects.all()
     serializer_class = EmployeeSerializer
-    permission_classes = [permissions.IsAdminUser]
+    permission_classes = [permissions.IsAdminUser, IsStaff]
 
 
 class EmployeeRoleList(generics.ListAPIView):
     serializer_class = EmployeeSerializer
-    permission_classes = [permissions.IsAdminUser]
+    permission_classes = [permissions.IsAdminUser, IsStaff]
 
     def get_queryset(self):
         """

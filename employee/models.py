@@ -1,5 +1,6 @@
 from datetime import date
 
+from django.contrib.auth.models import User
 from django.db import models
 
 from mptt.models import MPTTModel, TreeForeignKey
@@ -25,6 +26,7 @@ class EmployeeMPTT(MPTTModel):
     salary_amount = models.PositiveIntegerField()
     paid_salary_inf = models.PositiveIntegerField()
     parent = TreeForeignKey('self', null=True, blank=True, related_name='employee', on_delete=models.SET_NULL)
+    user = models.ForeignKey(User, on_delete=models.SET(1))
 
     def __str__(self):
         return self.first_last_patro_name
