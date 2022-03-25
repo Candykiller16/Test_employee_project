@@ -14,13 +14,13 @@ class EmployeeListView(generics.ListAPIView):
     """
     queryset = EmployeeMPTT.objects.all()
     serializer_class = EmployeeSerializer
-    permission_classes = [IsOwner]
+    permission_classes = [permissions.IsAuthenticated, IsStaff, permissions.IsAdminUser]
 
 
 class EmployeeDetailView(generics.RetrieveAPIView):
     queryset = EmployeeMPTT.objects.all()
     serializer_class = EmployeeSerializer
-    permission_classes = [IsOwner]
+    permission_classes = [IsOwner, permissions.IsAuthenticated]
 
 
 class EmployeeRoleList(generics.ListAPIView):
