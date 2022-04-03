@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-+$rl_o_k@yw5^^o63m3!_f=e0ehu^@_$gs$kdw(@*^)1n&q&$#
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['0.0.0.0']
 
 
 # Application definition
@@ -42,6 +42,9 @@ INSTALLED_APPS = [
     'api.apps.ApiConfig',
     'rest_framework',
     'django_seed',
+
+    'djoser',
+    'rest_framework.authtoken',
 ]
 
 MIDDLEWARE = [
@@ -82,11 +85,11 @@ WSGI_APPLICATION = 'test_employee_project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'employee_2',
-        'USER' : 'candykiller',
-        'PASSWORD' : '16anton061998',
-        'HOST' : '127.0.0.1',
-        'PORT' : '5432',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'PASSWORD': '1234',
+        'HOST': 'db',
+        'PORT': '5432',
     }
 }
 
@@ -139,5 +142,10 @@ REST_FRAMEWORK = {
     ],
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated',
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
     ]
 }
